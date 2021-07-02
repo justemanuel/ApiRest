@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 
 namespace ApiRest.WebApi
 {
@@ -39,11 +40,14 @@ namespace ApiRest.WebApi
             });
 
             services.AddDbContext<ApiDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("ApiRest.WebApi")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"), 
+                    b => b.MigrationsAssembly("ApiRest.WebApi")));
 
             services.AddScoped(typeof(IApplication<>), typeof(Application<>));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddScoped(typeof(IDbContext<>), typeof(DbContext<>));
+
+            services.AddAutoMapper(typeof(Startup));
 
         }
 
