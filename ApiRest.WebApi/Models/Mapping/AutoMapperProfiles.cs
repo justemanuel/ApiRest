@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ApiRest.Entities;
+﻿using ApiRest.Entities;
+using ApiRest.WebApi.Models.DTOs;
 using AutoMapper;
 
 namespace ApiRest.WebApi.Models.Mapping

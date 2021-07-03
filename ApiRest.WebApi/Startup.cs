@@ -49,7 +49,7 @@ namespace ApiRest.WebApi
                 options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(jwt =>
             {
-                var key = Encoding.ASCII.GetBytes(Configuration["Jwt:Secret"]);
+                var key = Encoding.ASCII.GetBytes(Configuration["JwtConfig:Secret"]);
 
                 jwt.SaveToken = true;
                 jwt.TokenValidationParameters = new TokenValidationParameters
@@ -66,6 +66,8 @@ namespace ApiRest.WebApi
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApiDbContext>();
+
+            services.AddScoped<ITokenHandleService, TokenHandleService>();
 
             services.AddScoped(typeof(IApplication<>), typeof(Application<>));
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));

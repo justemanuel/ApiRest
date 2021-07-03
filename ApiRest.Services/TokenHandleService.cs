@@ -8,7 +8,12 @@ using System.Text;
 
 namespace ApiRest.Services
 {
-    public class TokenHandleService
+    public interface ITokenHandleService
+    {
+        string GenerateJwtToken(ITokenParameters pars);
+    }
+
+    public class TokenHandleService : ITokenHandleService
     {
         private readonly JwtConfig _jwtConfig;
 
