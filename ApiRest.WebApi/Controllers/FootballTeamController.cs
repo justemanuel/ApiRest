@@ -1,6 +1,6 @@
 ﻿using ApiRest.Application;
 using ApiRest.Entities;
-using ApiRest.WebApi.Models;
+using ApiRest.WebApi.Models.DTOs;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

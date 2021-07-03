@@ -1,4 +1,4 @@
-﻿namespace ApiRest.WebApi.Models
+﻿namespace ApiRest.WebApi.Models.DTOs
 {
     public class FootballTeamDto
     {
