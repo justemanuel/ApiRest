@@ -37,7 +37,7 @@ namespace ApiRest.Services
                     new Claim(JwtRegisteredClaimNames.Email, pars.UserName)
                 }),
 
-                Expires = DateTime.UtcNow.AddHours(3),
+                Expires = DateTime.UtcNow.AddSeconds(10),
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha512Signature)
             };

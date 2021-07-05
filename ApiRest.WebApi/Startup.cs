@@ -78,7 +78,7 @@ namespace ApiRest.WebApi
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApiDbContext context)
         {
             if (env.IsDevelopment())
             {
@@ -86,6 +86,8 @@ namespace ApiRest.WebApi
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ApiRest.WebApi v1"));
             }
+
+            context.Database.Migrate();
 
             app.UseHttpsRedirection();
 

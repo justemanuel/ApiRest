@@ -11,6 +11,12 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
 COPY ["ApiRest.WebApi/ApiRest.WebApi.csproj", "ApiRest.WebApi/"]
+COPY ["ApiRest.Services/ApiRest.Services.csproj", "ApiRest.Services/"]
+COPY ["ApiRest.Abstractions/ApiRest.Abstractions.csproj", "ApiRest.Abstractions/"]
+COPY ["ApiRest.Entities/ApiRest.Entities.csproj", "ApiRest.Entities/"]
+COPY ["ApiRest.Application/ApiRest.Application.csproj", "ApiRest.Application/"]
+COPY ["ApiRest.Repository/ApiRest.Repository.csproj", "ApiRest.Repository/"]
+COPY ["ApiRest.DataAccess/ApiRest.DataAccess.csproj", "ApiRest.DataAccess/"]
 RUN dotnet restore "ApiRest.WebApi/ApiRest.WebApi.csproj"
 COPY . .
 WORKDIR "/src/ApiRest.WebApi"
