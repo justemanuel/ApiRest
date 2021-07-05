@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Serilog;
 using System.Text;
 
 namespace ApiRest.WebApi
@@ -37,7 +38,7 @@ namespace ApiRest.WebApi
             });
 
             services.AddDbContext<ApiDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("OptionalConnection"),
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
                     b => b.MigrationsAssembly("ApiRest.WebApi")));
 
             // JWT Security
@@ -80,6 +81,7 @@ namespace ApiRest.WebApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApiDbContext context)
         {
+            app.UseSerilogRequestLogging();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -90,7 +92,6 @@ namespace ApiRest.WebApi
             context.Database.Migrate();
 
             app.UseHttpsRedirection();
-
             app.UseRouting();
 
             app.UseAuthentication();

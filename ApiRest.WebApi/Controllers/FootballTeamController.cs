@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,16 +21,20 @@ namespace ApiRest.WebApi.Controllers
     {
         IApplication<FootballTeam> _appFootball;
         private readonly IMapper _mapper;
+        private readonly ILogger<FootballTeamController> _logger;
 
-        public FootballTeamController(IApplication<FootballTeam> appFootball, IMapper mapper)
+        public FootballTeamController(IApplication<FootballTeam> appFootball, IMapper mapper,
+            ILogger<FootballTeamController> logger)
         {
             _appFootball = appFootball;
             _mapper = mapper;
+            _logger = logger;
         }
 
         [HttpGet]
         public IActionResult Get()
         {
+            _logger.LogInformation("Get teams informations");
             var teams = _appFootball.GetAll();
 
             return Ok(_mapper.Map<IEnumerable<FootballTeamDto>>(teams));
